@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "App.h"
 
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
@@ -9,23 +9,7 @@ int WINAPI WinMain(
     // error handling
     try
     {
-        // register window class
-        Window wnd(800, 500, L"Renderer");
-
-        // message handle
-        MSG msg;
-        BOOL quitCode;
-        while ((quitCode = GetMessage(&msg, NULL, 0, 0)) > 0)
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-
-        // return code
-        if (quitCode == -1)
-            return -1;
-
-        return msg.wParam;
+        return App{}.Go();
     }
     // catching errors
     catch (const Exception& e)
